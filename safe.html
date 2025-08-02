@@ -1,0 +1,49 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeMeds during Pregnancy & Lactation</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+  <div class="nav-container">
+    <a href="hub.html" class="nav-logo">
+      <img src="logo.png" alt="Logo">
+      <span>UPC Consult</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="main.html">Home</a></li>
+      <li><a href="ask.html">Ask</a></li>
+      <li><a href="consult.html">Consultation</a></li>
+      <li><a href="AB.html">AB Calculator</a></li>
+      <li><a href="respiratory dose.html">Dose Calculator</a></li>
+    </ul>
+  </div>
+</nav>
+    <header>
+        <div class="header-content">
+            <!-- <img src="logo.png" alt="SafeMeds Logo" class="logo"> -->
+            <h1>SafeMeds during Pregnancy & Lactation</h1>
+            <!-- <button onclick="goBack()" class="back-button">← Back</button> -->
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search by drug name, category, or brand...">
+            <div class="category-grid" id="categoryGrid"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- <h2 class="categories-title">Browse by Category</h2> -->
+        <!-- <div class="category-grid" id="categoryGrid"></div> -->
+
+        <div id="searchResults" class="results-container"></div>
+    </main>
+
+    <script src="drugs.json"></script>
+    <script src="script.js"></script>
+</body>
+</html>

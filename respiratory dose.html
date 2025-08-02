@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Respiratory Medication Dose Calculator</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Respiratory Medication Dose Calculator">
+  <meta property="og:description" content="Quickly calculate doses for respiratory medications with this easy-to-use tool.">
+  <meta property="og:image" content="icon.png">
+  <meta property="og:type" content="website">
+  <style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a2980, #26d0ce);
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  header {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  header div:last-child {
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  .container {
+    padding: 30px;
+    max-width: 700px;
+    margin: 40px auto 0;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  }
+
+  label, select, input, button {
+    display: block;
+    width: 100%;
+    margin: 15px 0;
+    font-size: 1rem;
+  }
+
+  input, select {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 30px;
+    background: #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    background: #fff;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  }
+
+  button {
+    background-color: #ff7e5f;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  button:hover {
+    background-color: #ff5e3a;
+    transform: scale(1.05);
+  }
+
+  .result {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-left: 6px solid #1b9c85;
+    border-radius: 10px;
+    color: #1b1b1b;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  .navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.nav-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+</style>
+
+</head>
+<body>
+  <nav class="navbar">
+  <div class="nav-container">
+    <a href="hub.html" class="nav-logo">
+      <img src="logo.png" alt="Logo">
+      <span>UPC Consult</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="main.html">Home</a></li>
+      <li><a href="ask.html">Ask</a></li>
+      <li><a href="consult.html">Consultation</a></li>
+      <li><a href="AB.html">AB Calculator</a></li>
+      <li><a href="safe.html">Pregnancy Safety</a></li>
+    </ul>
+  </div>
+</nav>
+  <header>
+    <!-- <div class="logo">
+        <img src="logo.png" alt="Company Logo" style="height: 75px;">
+    </div> -->
+    <div>Respiratory Medication Dose Calculator</div>
+    <!-- <button onclick="goBack()" class="back-button">← Back</button> -->
+  </header>
+
+  <div class="container">
+    <label for="age">Enter Age (in years):</label>
+    <input type="number" id="age" placeholder="e.g. 4">
+
+    <button onclick="calculateDose()">Calculate Dose</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculateDose() {
+      const age = parseFloat(document.getElementById("age").value);
+      const result = document.getElementById("result");
+
+      if (isNaN(age) || age <= 0) {
+        result.innerHTML = "<strong>Please enter a valid age.</strong>";
+        return;
+      }
+
+      let doses = [];
+
+      // Define dose logic
+      if (age >= 2 && age <= 5) {
+        doses.push("##### Mucolytics #####");
+        doses.push("Bromohexine 4mg/5ml: 5ml twice daily");
+        doses.push("Ambroxol 15mg/5ml: 2.5ml 3 times");
+        doses.push("Ambroxol 30mg/5ml: 1.25ml 3 times");
+        doses.push("Carbocystiene 2%: 3ml - 5ml twice");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 1st Gen Anti-Histamin #####");
+        doses.push("Chlorpheniramine: 1mg 4 times");
+        doses.push("Dimetindene: 2drops/Kg/Day Divided on 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 2st Gen Anti-Histamin #####");
+        doses.push("Desloratadine: 1.25mg/day");
+        doses.push("Cetrizine: 2.5mg/day");
+        doses.push("Loratadine: 5mg/day");
+        doses.push("Fexofenadine: 30mg twice");
+      } else if (age > 5 && age < 6) {
+        doses.push("##### Mucolytics #####");
+        doses.push("Bromohexine 4mg/5ml: 5-10ml twice daily");
+        doses.push("Ambroxol 15mg/5ml: 2.5ml 3 times");
+        doses.push("Ambroxol 30mg/5ml: 1.25ml 3 times");
+        doses.push("Carbocystiene 2%: 5ml 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### Expectorant #####");
+        doses.push("Guaifenesin: 50mg 4 times daily");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 1st Gen Anti-Histamin #####");
+        doses.push("Chlorpheniramine: 1mg 4 times");
+        doses.push("Dimetindene: 2drops/Kg/Day Divided on 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 2st Gen Anti-Histamin #####");
+        doses.push("Desloratadine: 1.25mg/day");
+        doses.push("Cetrizine: 2.5mg/day");
+        doses.push("Loratadine: 5mg/day");
+        doses.push("Fexofenadine: 30mg twice");
+      } else if (age >= 6 && age <= 12) {
+        doses.push("##### Mucolytics #####");
+        doses.push("Bromohexine 4mg/5ml: 5-10ml twice daily");
+        doses.push("Ambroxol 15mg/5ml: 5ml 3 times");
+        doses.push("Ambroxol 30mg/5ml: 2.5ml 3 times");
+        doses.push("Carbocystiene 2%: 5ml 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### Expectorant #####");
+        doses.push("Guaifenesin: 100mg 4 times daily");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 1st Gen Anti-Histamin #####");
+        doses.push("Chlorpheniramine: 2mg 4 times");
+        doses.push("Diphenhydramine: 12.5-25mg 4 times");
+        doses.push("Dimetindene: 2drops/Kg/Day Divided on 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 2st Gen Anti-Histamin #####");
+        doses.push("Desloratadine: 2.5mg/day");
+        doses.push("Cetrizine: 2.5-5mg/day");
+        doses.push("Loratadine: 10mg/day");
+        doses.push("Fexofenadine: 30mg twice");
+      } else if (age > 12) {
+        doses.push("##### Mucolytics #####");
+        doses.push("Bromohexine 4mg/ml: 10ml 3 times");
+        doses.push("Ambroxol 30mg/5ml: 5ml 3 times");
+        doses.push("Carbocystiene 5%: 15ml 3 times");
+        doses.push("Acetylcisteine: 600mg once daily");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### Expectorant #####");
+        doses.push("Guaifenesin: 200mg - 400mg 4 times daily");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 1st Gen Anti-Histamin #####");
+        doses.push("Chlorpheniramine: 4mg 4 times");
+        doses.push("Diphenhydramine: 25-50mg 4 times");
+        doses.push("Dimetindene: 20-40 drops 3 times");
+        doses.push("---------------------------------------------------------");
+        doses.push("##### 2st Gen Anti-Histamin #####");
+        doses.push("Desloratadine: 5mg/day");
+        doses.push("Cetrizine: 5-10mg once");
+        doses.push("Loratadine: 10mg/day");
+        doses.push("Fexofenadine: 60mg twice");
+      } else if (age >= 1 && age < 2) {
+        doses.push("Dimetindene: 2 drops/kg/day divided into 3 times");
+      } else {
+        doses.push("No recommendations for this age.");
+      }
+
+      result.innerHTML = "<strong>Recommended Doses:</strong><ul>" + doses.map(d => `<li>${d}</li>`).join('') + "</ul>";
+    }
+  </script>
+</body>
+</html>

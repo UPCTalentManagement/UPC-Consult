@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UPC Consult</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600&display=swap">
+  <style>
+    :root {
+      --primary: #1a2980;
+      --secondary: #26d0ce;
+      --accent: #ff7e5f;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
+    }
+
+    /* Navbar */
+    nav.navbar {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .nav-logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 25px;
+      transition: background 0.3s ease;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Section */
+    header {
+      text-align: center;
+      margin-top: 60px;
+      padding: 20px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      height: 70px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    p.subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    /* Buttons */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1000px;
+      padding: 20px;
+    }
+
+    .tool-button {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 25px;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .tool-button:hover {
+      transform: translateY(-8px) scale(1.03);
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 60px;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.1rem; }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="hub.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>UPC Consult</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="ask.html">Ask</a></li>
+        <li><a href="consult.html">Consultation</a></li>
+        <li><a href="AB.html">AB Calculator</a></li>
+        <li><a href="respiratory dose.html">Dose Calculator</a></li>
+        <li><a href="safe.html">Pregnancy Safety</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header>
+    <!-- <img src="logo.png" alt="Logo" class="logo"> -->
+    <h1>UPC Consult</h1>
+    <p class="subtitle">Every Tool a Professional Pharmacist Needs, in One Place</p>
+  </header>
+
+  <!-- Tool Buttons -->
+  <div class="button-grid">
+    <a href="ask.html" class="tool-button">🧠 Ask Your Question </a>
+    <a href="consult.html" class="tool-button">📋 Flash Cards </a>
+    <a href="AB.html" class="tool-button">💊 Anti-Biotics Dose Calculator</a>
+    <a href="respiratory dose.html" class="tool-button">🩺 Respiratory Dose Calculator</a>
+    <a href="safe.html" class="tool-button">👶 Safe During Pregnancy</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 UPC Consult. Designed with ❤️ for better pharmacist care.
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPC Antibiotic Dose Calculator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- For modern browsers (optional PNG version) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icon16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon512x512.png">
+    <style>
+  :root {
+    --primary-color: #1a2980;
+    --secondary-color: #26d0ce;
+    --accent-color: #ff7e5f;
+    --error-color: #e74c3c;
+    --info-bg: rgba(255, 255, 255, 0.9);
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    /* padding: 30px 15px; */
+    min-height: 100vh;
+    /* display: flex;
+    justify-content: center;
+    align-items: flex-start; */
+    display: block;
+    /* justify-content: center; */
+    justify-items: center;
+  }
+
+  .calculator {
+    margin-top: 50px;
+    background: var(--info-bg);
+    color: #333;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 850px;
+    width: 100%;
+    /* display: inline-block; */
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  .input-group {
+    margin-bottom: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  label {
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  select, input {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 30px;
+    background: #f3f4f6;
+    font-size: 1rem;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    transition: 0.3s;
+  }
+
+  select:focus, input:focus {
+    outline: none;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+  }
+
+  button {
+    display: block;
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: #ff5e3a;
+    transform: scale(1.03);
+  }
+
+  .error {
+    color: var(--error-color);
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .notes {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff3e0;
+    border-left: 6px solid #ffa726;
+    border-radius: 10px;
+    color: #5d4037;
+  }
+
+  .results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  .results th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .results td {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+  }
+
+  .disclaimer {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #ffe5e5;
+    border-left: 5px solid var(--error-color);
+    border-radius: 10px;
+    color: #721c24;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .input-group {
+      grid-template-columns: 1fr;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
+  .navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.nav-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+}
+.back-button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  max-width: 91px;
+}
+</style>
+
+</head>
+<body>
+  <nav class="navbar">
+  <div class="nav-container">
+    <a href="hub.html" class="nav-logo">
+      <img src="logo.png" alt="Logo">
+      <span>UPC Consult</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="main.html">Home</a></li>
+      <li><a href="ask.html">Ask</a></li>
+      <li><a href="consult.html">Consultation</a></li>
+      <li><a href="respiratory dose.html">Dose Calculator</a></li>
+      <li><a href="safe.html">Pregnancy Safety</a></li>
+      <!-- <button onclick="goBack()" class="back-button">← Back</button> -->
+    </ul>
+  </div>
+</nav>
+    <div class="calculator">
+        <h2>UPC Pediatric Antibiotic Dose Calculator</h2>
+        
+        <div class="input-group">
+            <div>
+                <label for="antibiotic">Select Antibiotic:</label>
+                <select id="antibiotic">
+                    <option value="amoxicillin">Amoxicillin/Clavulanic Acid</option>
+                    <option value="cefixime">Cefixime</option>
+                    <option value="cefradine">Cefradine</option>
+                    <option value="cefaclor">Cefaclor</option>
+                    <option value="cefdinir">Cefdinir</option>
+                    <option value="cefadroxil">Cefadroxil</option>
+                    <option value="clarithromycin">Clarithromycin</option>
+                    <option value="cefalexin">Cefalexin</option>
+                    <option value="cotrimoxazole">Co-trimoxazole (SMX/TMP)</option>
+                </select>
+            </div>
+            <div>
+                <label for="weight">Child's Weight (kg):</label>
+                <input type="number" id="weight" step="0.1" min="0">
+            </div>
+        </div>
+
+        <button onclick="calculateDose()">Calculate Dose</button>
+
+        <div id="error" class="error"></div>
+        <div id="notes" class="notes"></div>
+
+        <div class="results">
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Strength</th>
+                        <th>Dose per Administration</th>
+                        <th>Frequency</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Important:</strong> This calculator provides initial estimates only. Always verify doses with current guidelines and consult a pharmacist for renal/hepatic adjustments. Antibiotic use requires confirmed bacterial infection diagnosis.
+        </div>
+    </div>
+    <script>
+        const antibiotics = {
+            amoxicillin: {
+                strengths: [156, 228, 312, 457, 600],
+                dose: [45, 45], // mg/kg/day
+                frequency: "Every 12 hours",
+                maxDose: null,
+                notes: "First-line for most pediatric infections"
+            },
+            cefixime: {
+                strengths: [100],
+                dose: [8, 8],
+                frequency: "Once daily or BID",
+                maxDose: 400,
+                notes: "First-line for uncomplicated UTIs"
+            },
+            cefradine: {
+                strengths: [125, 250],
+                dose: [25, 50],
+                frequency: "QID (4 times daily)",
+                notes: "Monitor for GI side effects"
+            },
+            cefaclor: {
+                strengths: [125, 250],
+                dose: [20, 40],
+                frequency: "TID (3 times daily)",
+                notes: "Avoid in penicillin allergy"
+            },
+            cefdinir: {
+                strengths: [125],
+                dose: [14, 14],
+                frequency: "Once daily or BID",
+                notes: "May cause red stools (harmless)"
+            },
+            cefadroxil: {
+                strengths: [125, 250, 500],
+                dose: [30, 30],
+                frequency: "BID (twice daily)",
+                notes: "Preferred for skin/soft tissue infections"
+            },
+            clarithromycin: {
+                strengths: [125, 250],
+                dose: [15, 15],
+                frequency: "BID (twice daily)",
+                notes: "Macrolide alternative for penicillin allergy"
+            },
+            cefalexin: {
+                strengths: [125, 250],
+                dose: [25, 50],
+                frequency: "QID (4 times daily)",
+                notes: "First-line for streptococcal infections"
+            },
+            cotrimoxazole: {
+                strengths: [200], // TMP component (40mg SMX per 5ml)
+                dose: [6, 12], // Based on TMP component
+                frequency: "BID (twice daily)",
+                notes: "Contains sulfa - check for allergies",
+                calculationNote: "Dose based on trimethoprim component"
+            }
+        };
+
+        function calculateDose() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const antibiotic = document.getElementById('antibiotic').value;
+            const errorDiv = document.getElementById('error');
+            const notesDiv = document.getElementById('notes');
+            const tbody = document.getElementById('resultsBody');
+            
+            // Reset previous content
+            errorDiv.textContent = '';
+            notesDiv.textContent = '';
+            tbody.innerHTML = '';
+
+            // Validation
+            if (isNaN(weight) || weight <= 0) {
+                errorDiv.textContent = "Please enter a valid positive weight";
+                return;
+            }
+
+            const abx = antibiotics[antibiotic];
+            let notes = [];
+            if (abx.notes) notes.push(abx.notes);
+            if (abx.calculationNote) notes.push(abx.calculationNote);
+
+            // Display notes
+            notesDiv.innerHTML = notes.join('<br>');
+
+            // Calculate for each strength
+            abx.strengths.forEach(strength => {
+                const tr = document.createElement('tr');
+                
+                // Calculate dose range
+                const doses = abx.dose.map(d => {
+                    let dailyDose = d * weight;
+                    if (abx.maxDose && dailyDose > abx.maxDose) dailyDose = abx.maxDose;
+                    const dosePerAdmin = (dailyDose * 5) / strength;
+                    return dosePerAdmin.toFixed(1);
+                });
+
+                const doseText = abx.dose[0] === abx.dose[1] 
+                    ? `${doses[0]} mL`
+                    : `${doses[0]} - ${doses[1]} mL`;
+
+                tr.innerHTML = `
+                    <td>${strength}mg/5ml</td>
+                    <td>${doseText}</td>
+                    <td>${abx.frequency}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
